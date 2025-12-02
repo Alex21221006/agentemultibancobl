@@ -20,6 +20,7 @@
         </field>
     </record>
 
+
     <!-- Vista FORM -->
     <record id="view_agent_receipt_form" model="ir.ui.view">
         <field name="name">agent.receipt.form</field>
