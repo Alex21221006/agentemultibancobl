@@ -3,14 +3,16 @@
 
     <!-- Página principal del Agente Multibanco B&L -->
     <template id="agente_bl_page"
-              name="Agente Multibanco B&amp;L">
+              name="Agente Multibanco B&amp;L"
+              page="True">
 
         <!-- Usamos el layout estándar de Odoo, sin modificarlo -->
         <t t-call="website.layout">
-            <main id="agente-multibanco-bl" class="o_container">
 
-                <!-- Título de la pestaña -->
-                <t t-set="title">Agente Multibanco B&amp;L</t>
+            <!-- Título de la pestaña -->
+            <t t-set="title">Agente Multibanco B&amp;L</t>
+
+            <main id="agente-multibanco-bl" class="o_container">
 
                 <!-- ===========================
                      LOGIN
@@ -31,11 +33,11 @@
 
                             <div class="remember-row">
                                 <label class="check">
-                                    <input type="checkbox" id="rememberUser" /> Recordar usuario
+                                    <input type="checkbox" id="rememberUser"/> Recordar usuario
                                 </label>
 
                                 <label class="check">
-                                    <input type="checkbox" id="rememberPass" /> Recordar contraseña
+                                    <input type="checkbox" id="rememberPass"/> Recordar contraseña
                                 </label>
                             </div>
 
@@ -263,7 +265,7 @@
 
                 <!-- jsPDF desde CDN (solo para el PDF de la boleta).
                      Tu script.js se carga vía assets en el manifest. -->
-                <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"/>
+                <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
                 <script>
                     window.jsPDF = window.jspdf.jsPDF;
                 </script>
