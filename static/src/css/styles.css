@@ -177,23 +177,35 @@ small{display:block; margin-top:4px; color:var(--muted); opacity:.8}
 
 /* ===== Ajustes login: recordar usuario/contraseña ===== */
 
-#loginView .row.between {
+/* Fila específica para los checkboxes del login */
+.login .row.remember {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;              /* separación entre los dos labels */
-  flex-wrap: wrap;        /* por si la pantalla es muy chica */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 48px;              /* separación entre los dos checkboxes */
+  margin-top: 10px;
 }
 
-#loginView label.check {
-  display: inline-flex;
+/* Cada checkbox con su texto debajo */
+.login .row.remember .check {
+  display: flex;
+  flex-direction: column; /* checkbox arriba, texto abajo */
   align-items: center;
-  gap: 6px;               /* espacio entre el checkbox y el texto */
+  gap: 4px;
   font-size: 0.8rem;
-  color: var(--muted, #a0a0b5);
-  cursor: pointer;
+  color: var(--muted);
 }
 
-#loginView label.check input[type="checkbox"] {
+/* El texto “Recordar usuario / Recordar contraseña” */
+.login .row.remember .check-text {
+  display: block;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Tamaño del checkbox para que no se deforme con estilos de Odoo */
+.login .row.remember .check input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
   margin: 0;
 }
