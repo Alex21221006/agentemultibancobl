@@ -7,12 +7,13 @@
               page="True">
 
         <!-- Usamos el layout estándar de Odoo, sin modificarlo -->
-        <t t-call="website.layout">
+       <t t-call="web.layout">
+
 
             <!-- Título de la pestaña -->
             <t t-set="title">Agente Multibanco B&amp;L</t>
 
-            <main id="agente-multibanco-bl" class="o_container">
+            <main id="agente-multibanco-bl">
 
                 <!-- ===========================
                      LOGIN
