@@ -165,8 +165,23 @@ document.addEventListener('click', async (ev) => {
   let data = null;
   try { data = await res.json(); } catch (_) {}
 
+  // Manejo de errores más amigable
   if (!res.ok || data?.error) {
-    alert(data?.error || `Error del backend (${res.status}). Inténtalo más tarde.`);
+    let msg = null;
+
+    if (!res.ok) {
+      msg = `Error del backend (${res.status}). Inténtalo más tarde.`;
+    } else if (data?.error) {
+      if (typeof data.error === "string") {
+        msg = data.error;
+      } else if (typeof data.error.message === "string") {
+        msg = data.error.message;
+      } else {
+        msg = "Ocurrió un error al consultar el DNI.";
+      }
+    }
+
+    alert(msg);
     return;
   }
 
