@@ -2,8 +2,8 @@
     <!-- Página principal del Agente Multibanco B&L -->
     <template id="agente_bl_page"
               name="Agente Multibanco B&amp;L"
-              inherit_id="website.layout">
-        <template id="agente_bl_header_fix" inherit_id="website.layout">
+              inherit_id="website.page">
+        <template id="agente_bl_header_fix" inherit_id="website.page">
             <xpath expr="//a[contains(@class,'btn')][contains(text(),'Inicia sesión')]" position="attributes">
                 <attribute name="href">/web/login</attribute>
             </xpath>
@@ -15,7 +15,8 @@
 
 
         <!-- Reemplazamos el <main> del layout del website -->
-        <xpath expr="//main" position="replace">
+        <xpath expr="//main" position="inside">
+
             <main id="agente-multibanco-bl" class="o_container">
 
                 <!-- Título de la pestaña -->
