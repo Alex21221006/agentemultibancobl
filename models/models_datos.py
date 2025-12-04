@@ -112,13 +112,16 @@ class AgentReceipt(models.Model):
         currency_field="currency_id",
     )
 
-    # Comisión CALCULADA automáticamente según el monto
+    # Comisión editable, pero con cálculo automático por defecto
     fee = fields.Monetary(
         string="Comisión",
         currency_field="currency_id",
-        compute="_compute_fee",
-        store=True,
-        readonly=True,
+    )
+
+    # Flag interno: True si el usuario modificó la comisión a mano
+    manual_fee = fields.Boolean(
+        string="Comisión manual",
+        default=False,
     )
 
     total = fields.Monetary(
@@ -130,25 +133,44 @@ class AgentReceipt(models.Model):
     )
 
     # ============================
-    #   Cálculo de montos
+    #   Cálculo de comisión y total
     # ============================
-    @api.depends("amount")
-    def _compute_fee(self):
+    @api.onchange("amount")
+    def _onchange_amount_set_fee(self):
         """
-        Regla:
+        Si manual_fee es False, calculamos automáticamente la comisión:
           - 0 o negativo -> comisión 0
           - 0 < monto <= 100  -> 1
           - 100 < monto <= 200 -> 2
           - 200 < monto <= 300 -> 3
           - ...
-          En general: ceil(monto / 100)
+          ceil(monto / 100)
+        Si manual_fee es True, respetamos lo que puso el usuario.
         """
         for rec in self:
             amt = rec.amount or 0.0
+            if rec.manual_fee:
+                # El usuario ya tocó la comisión → no la modificamos
+                continue
+
             if amt <= 0:
                 rec.fee = 0.0
             else:
                 rec.fee = float(math.ceil(amt / 100.0))
+
+    @api.onchange("fee")
+    def _onchange_fee_mark_manual(self):
+        """
+        Si el usuario cambia la comisión en el formulario,
+        marcamos manual_fee = True para que ya no se recalculen
+        los próximos cambios de amount.
+        """
+        for rec in self:
+            # Si pone None o 0, podríamos considerar que vuelve a automático.
+            if rec.fee and rec.fee > 0:
+                rec.manual_fee = True
+            else:
+                rec.manual_fee = False
 
     @api.depends("amount", "fee")
     def _compute_total(self):
