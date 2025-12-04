@@ -1,24 +1,32 @@
 <odoo>
 
-    <!-- Vista LIST -->
-    <record id="view_agent_receipt_list" model="ir.ui.view">
-        <field name="name">agent.receipt.list</field>
-        <field name="model">agent.receipt</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="date"/>
-                <field name="bank"/>
-                <field name="movement"/>
-                <field name="solicitante_nombre"/>
-                <field name="beneficiario_nombre"/>
-                <field name="amount"/>
-                <field name="fee"/>
-                <field name="total"/>
-                <field name="cancelled"/>
-            </list>
-        </field>
-    </record>
+<!-- Vista LIST -->
+<record id="view_agent_receipt_list" model="ir.ui.view">
+    <field name="name">agent.receipt.list</field>
+    <field name="model">agent.receipt</field>
+    <field name="arch" type="xml">
+        <list>
+            <field name="name" string="N° Boleta"/>
+            <field name="date"/>
+            <field name="bank"/>
+            <field name="movement"/>
+            <field name="solicitante_nombre" string="Nombre solicitante"/>
+            <field name="beneficiario_nombre" string="Nombre beneficiario"/>
+            <field name="amount"/>
+            <field name="fee"/>
+            <field name="total"/>
+            <field name="cancelled"/>
+
+            <!-- Columna para ver/descargar la boleta PDF -->
+            <button name="%(action_report_agent_receipt)d"
+                    type="action"
+                    string="Ver boleta"
+                    class="btn-secondary"
+                    icon="fa-print"/>
+        </list>
+    </field>
+</record>
+
 
     <!-- Vista FORM -->
     <record id="view_agent_receipt_form" model="ir.ui.view">
