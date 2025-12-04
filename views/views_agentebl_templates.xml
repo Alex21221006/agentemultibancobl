@@ -1,276 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <data>
 
-    <!-- Página principal del Agente Multibanco B&L -->
-    <template id="agente_bl_page"
-              name="Agente Multibanco B&amp;L"
-              page="True">
+        <!-- Vista QWeb principal del Agente Multibanco B&L -->
+        <record id="agente_bl_page" model="ir.ui.view">
+            <field name="name">Agente Multibanco B&amp;L</field>
+            <field name="type">qweb</field>
+            <field name="key">moduloagentebl.agente_bl_page</field>
 
-        <!-- Usamos el layout estándar del Website -->
-        <t t-call="website.layout">
+            <field name="arch" type="xml">
+                <t t-name="moduloagentebl.agente_bl_page">
+                    <t t-call="web.layout">
 
-            <!-- Título de la pestaña -->
-            <t t-set="title">Agente Multibanco B&amp;L</t>
+                        <t t-set="title">Agente Multibanco B&amp;L</t>
 
-            <main id="agente-multibanco-bl">
+                        <main id="agente-multibanco-bl">
 
-                <!-- ===========================
-                     LOGIN
-                     =========================== -->
-                <section id="loginView" class="view center">
-                    <div class="card login">
-                        <h1 class="brand">Agente B&amp;L</h1>
-                        <p class="muted">Acceso exclusivo del personal autorizado</p>
+                            <!-- LOGIN -->
+                            <section id="loginView" class="view center">
+                                <div class="card login">
+                                    <h1 class="brand">Agente B&amp;L</h1>
+                                    <p class="muted">Acceso exclusivo del personal autorizado</p>
 
-                        <form id="loginForm" autocomplete="on">
-                            <label>Usuario
-                                <input type="text" id="lgUser" placeholder="ManuelBL" required="required"/>
-                            </label>
+                                    <form id="loginForm">
+                                        <label>Usuario
+                                            <input type="text" id="lgUser" placeholder="ManuelBL" required="required"/>
+                                        </label>
 
-                            <label>Contraseña
-                                <input type="password" id="lgPass" placeholder="12345678" required="required"/>
-                            </label>
+                                        <label>Contraseña
+                                            <input type="password" id="lgPass" placeholder="12345678" required="required"/>
+                                        </label>
 
-                            <div class="remember-row">
-                                <label class="check">
-                                    <input type="checkbox" id="rememberUser"/> Recordar usuario
-                                </label>
+                                        <div class="remember-row">
+                                            <label class="check">
+                                                <input type="checkbox" id="rememberUser"/> Recordar usuario
+                                            </label>
 
-                                <label class="check">
-                                    <input type="checkbox" id="rememberPass"/> Recordar contraseña
-                                </label>
-                            </div>
-
-                            <button class="btn primary" type="submit">Iniciar sesión</button>
-                        </form>
-
-                        <!-- Enlace para entrar al panel Odoo REAL -->
-                        <div class="admin-link" style="margin-top: 16px; text-align: center;">
-                            <a href="/web/login?redirect=/web"
-                               target="_blank"
-                               style="color:#00e0ff; text-decoration:underline; font-size:0.9rem;">
-                                ← Ingresar al panel Odoo (administrador)
-                            </a>
-                        </div>
-
-                    </div>
-                </section>
-
-                <!-- ===========================
-                     APLICACIÓN
-                     =========================== -->
-                <section id="appView" class="view hidden">
-
-                    <!-- Topbar -->
-                    <header class="topbar">
-                        <div class="left">
-                            <span class="logo">B&amp;L</span>
-                            <span class="title">Panel de Agente Multibanco</span>
-                        </div>
-                        <div class="right">
-                            <button id="btnAgent" class="chip active">Mi agente</button>
-                            <button id="btnReceipts" class="chip">Mis recibos</button>
-                            <div class="divider"></div>
-                            <button id="btnLogout" class="chip warn">Salir</button>
-                        </div>
-                    </header>
-
-                    <!-- MI AGENTE -->
-                    <main id="agentView">
-                        <div class="card op-card">
-                            <h2>Operación</h2>
-
-                            <!-- DOS COLUMNAS -->
-                            <div class="grid two">
-
-                                <!-- IZQUIERDA -->
-                                <div class="col-left">
-
-                                    <label for="bank">Banco / Red</label>
-                                    <select id="bank" required="required">
-                                        <option value="">— Seleccione —</option>
-                                        <option>BCP</option>
-                                        <option>INTERBANK</option>
-                                        <option>BBVA</option>
-                                        <option>SCOTIABANK</option>
-                                        <option>CAJA AREQUIPA</option>
-                                        <option>CAJA CUSCO</option>
-                                        <option>BANCO DE LA NACION</option>
-                                        <option>YAPE</option>
-                                        <option>PLIN</option>
-                                        <option>BIM</option>
-                                        <option>KASNET</option>
-                                        <option>PAGAYA</option>
-                                        <option>BITEL</option>
-                                        <option>ENTEL</option>
-                                        <option>MOVISTAR</option>
-                                        <option>CLARO</option>
-                                        <option>AZULITO</option>
-                                    </select>
-
-                                    <label for="movement">Tipo de movimiento</label>
-                                    <select id="movement" required="required">
-                                        <option value="">— Seleccione —</option>
-                                        <option>Depósito</option>
-                                        <option>Retiro</option>
-                                        <option>Giro</option>
-                                        <option>Pago</option>
-                                        <option>Recarga</option>
-                                    </select>
-
-                                    <!-- Solicitante -->
-                                    <div class="field-row">
-                                        <label for="dniSolicitante">DNI del solicitante</label>
-                                        <div class="input-action">
-                                            <input id="dniSolicitante" type="text" inputmode="numeric"
-                                                   maxlength="8" placeholder="Ej: 12345678"/>
-                                            <button type="button" class="btn-icon dni-lookup"
-                                                    data-target="dniSolicitante">🔎
-                                            </button>
+                                            <label class="check">
+                                                <input type="checkbox" id="rememberPass"/> Recordar contraseña
+                                            </label>
                                         </div>
-                                    </div>
 
-                                    <!-- Beneficiario -->
-                                    <div class="field-row">
-                                        <label for="dniBeneficiario">DNI del beneficiario</label>
-                                        <div class="input-action">
-                                            <input id="dniBeneficiario" type="text" inputmode="numeric"
-                                                   maxlength="8" placeholder="Ej: 87654321"/>
-                                            <button type="button" class="btn-icon dni-lookup"
-                                                    data-target="dniBeneficiario">🔎
-                                            </button>
-                                        </div>
-                                    </div>
+                                        <button class="btn primary" type="submit">Iniciar sesión</button>
+                                    </form>
 
-                                    <label for="account">N° cuenta / N° celular</label>
-                                    <input type="text" id="account" placeholder="Cuenta / Celular"/>
-
-                                    <label for="description">Descripción</label>
-                                    <input list="descList" id="description"
-                                           placeholder="Escribe y guarda; aprenderá sugerencias"/>
-                                    <datalist id="descList"></datalist>
-                                    <small class="muted">Ej.: AVON, AZZORTI, SANTANDER, etc.</small>
-
-                                    <div class="grid two tight">
-                                        <div>
-                                            <label for="amount">Monto (S/)</label>
-                                            <input type="number" id="amount" min="0" step="1" placeholder="0"/>
-                                        </div>
-                                        <div>
-                                            <label for="fee">Comisión (S/)</label>
-                                            <input type="number" id="fee" min="0" step="0.01"/>
-                                            <small class="muted">Puedes editar para aplicar descuento.</small>
-                                        </div>
-                                    </div>
-
-                                    <label for="total">Total (S/)</label>
-                                    <input type="number" id="total" readonly="readonly"/>
-
-                                    <div class="actions">
-                                        <button class="btn" id="btnClear" type="reset">Limpiar</button>
-                                        <button class="btn primary" id="btnSave" type="button">
-                                            Guardar y generar boleta
-                                        </button>
+                                    <div class="admin-link" style="margin-top: 16px; text-align: center;">
+                                        <a href="/web/login?redirect=/web"
+                                           target="_blank"
+                                           style="color:#00e0ff; text-decoration:underline; font-size:0.9rem;">
+                                            ← Ingresar al panel Odoo (administrador)
+                                        </a>
                                     </div>
 
                                 </div>
+                            </section>
 
-                                <!-- DERECHA -->
-                                <div class="col-right">
+                            <!-- PANEL PRINCIPAL -->
+                            <section id="appView" class="view hidden">
 
-                                    <label for="agOperator">Operador</label>
-                                    <input id="agOperator" type="text" readonly="readonly"/>
+                                <header class="topbar">
+                                    <div class="left">
+                                        <span class="logo">B&amp;L</span>
+                                        <span class="title">Panel de Agente Multibanco</span>
+                                    </div>
+                                    <div class="right">
+                                        <button id="btnAgent" class="chip active">Mi agente</button>
+                                        <button id="btnReceipts" class="chip">Mis recibos</button>
+                                        <div class="divider"></div>
+                                        <button id="btnLogout" class="chip warn">Salir</button>
+                                    </div>
+                                </header>
 
-                                    <label for="opDate">Fecha</label>
-                                    <input type="date" id="opDate"/>
+                                <main id="agentView">
+                                    <div class="card op-card">
+                                        <h2>Operación</h2>
 
-                                    <label for="nomSolicitante">Apellidos y Nombres (auto)</label>
-                                    <input id="nomSolicitante" type="text"
-                                           placeholder="Se completa al escribir el DNI"/>
+                                        <div class="grid two">
 
-                                    <label for="nomBeneficiario">Apellidos y Nombres (auto)</label>
-                                    <input id="nomBeneficiario" type="text"
-                                           placeholder="Se completa al escribir el DNI"/>
+                                            <div class="col-left">
 
-                                </div>
+                                                <label>Banco / Red</label>
+                                                <select id="bank">
+                                                    <option value="">— Seleccione —</option>
+                                                    <option>BCP</option>
+                                                    <option>INTERBANK</option>
+                                                    <option>BBVA</option>
+                                                    <option>SCOTIABANK</option>
+                                                    <option>CAJA AREQUIPA</option>
+                                                    <option>CAJA CUSCO</option>
+                                                    <option>BANCO DE LA NACION</option>
+                                                    <option>YAPE</option>
+                                                    <option>PLIN</option>
+                                                    <option>BIM</option>
+                                                    <option>KASNET</option>
+                                                    <option>PAGAYA</option>
+                                                    <option>BITEL</option>
+                                                    <option>ENTEL</option>
+                                                    <option>MOVISTAR</option>
+                                                    <option>CLARO</option>
+                                                    <option>AZULITO</option>
+                                                </select>
 
-                            </div>
-                        </div>
+                                                <label>Tipo de movimiento</label>
+                                                <select id="movement">
+                                                    <option value="">— Seleccione —</option>
+                                                    <option>Depósito</option>
+                                                    <option>Retiro</option>
+                                                    <option>Giro</option>
+                                                    <option>Pago</option>
+                                                    <option>Recarga</option>
+                                                </select>
 
-                        <!-- Info comisión -->
-                        <div class="card minihelp">
-                            <h3>Reglas de comisión</h3>
-                            <ul>
-                                <li>≤ S/ 100 → S/ 1</li>
-                                <li>≤ S/ 200 → S/ 2</li>
-                                <li>≤ S/ 300 → S/ 3</li>
-                                <li>… (S/ 1 por cada S/ 100)</li>
-                            </ul>
-                            <p class="muted">Cálculo automático mientras escribes.</p>
-                        </div>
-                    </main>
+                                                <label>DNI del solicitante</label>
+                                                <input id="dniSolicitante" maxlength="8" />
 
-                    <!-- MIS RECIBOS -->
-                    <main id="receiptsView" class="hidden">
-                        <div class="card">
-                            <div class="row between wrap">
-                                <h2>Mis recibos</h2>
-                                <div class="row gap">
-                                    <label>Filtrar por fecha
-                                        <input type="date" id="fltDate"/>
-                                    </label>
+                                                <label>DNI del beneficiario</label>
+                                                <input id="dniBeneficiario" maxlength="8" />
 
-                                    <label>Banco / Red
-                                        <select id="fltBank">
-                                            <option value="">Todos</option>
-                                        </select>
-                                    </label>
+                                                <label>Cuenta / Celular</label>
+                                                <input id="account" />
 
-                                    <button class="btn" id="btnClearFilters">Limpiar filtros</button>
-                                </div>
-                            </div>
+                                                <label>Descripción</label>
+                                                <input id="description" list="descList"/>
+                                                <datalist id="descList"></datalist>
 
-                            <div class="table-wrap">
-                                <table id="tblReceipts">
-                                    <thead>
-                                    <tr>
-                                        <th>Banco/Red</th>
-                                        <th>Movimiento</th>
-                                        <th>Solicitante</th>
-                                        <th>Beneficiario</th>
-                                        <th>Cuenta</th>
-                                        <th>Descripción</th>
-                                        <th>Monto</th>
-                                        <th>Comisión</th>
-                                        <th>Total</th>
-                                        <th>Fecha</th>
-                                        <th>Boleta</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
+                                                <label>Monto (S/)</label>
+                                                <input id="amount" type="number"/>
 
-                            <div class="row end">
-                                <div class="card total">
-                                    Total comisiones del día:
-                                    <strong>S/ <span id="sumFees">0</span></strong>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
+                                                <label>Comisión (S/)</label>
+                                                <input id="fee" type="number"/>
 
-                </section>
+                                                <label>Total (S/)</label>
+                                                <input id="total" type="number" readonly="readonly"/>
 
-                <!-- jsPDF desde CDN (solo para el PDF de la boleta).
-                     Tu script.js se carga vía assets en el manifest. -->
-                <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-                <script>
-                    window.jsPDF = window.jspdf.jsPDF;
-                </script>
+                                                <div class="actions">
+                                                    <button id="btnClear" class="btn">Limpiar</button>
+                                                    <button id="btnSave" class="btn primary">Guardar</button>
+                                                </div>
 
-            </main>
-        </t>
-    </template>
+                                            </div>
+
+                                            <div class="col-right">
+                                                <label>Operador</label>
+                                                <input id="agOperator" readonly="readonly"/>
+
+                                                <label>Fecha</label>
+                                                <input id="opDate" type="date"/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </main>
+
+                                <main id="receiptsView" class="hidden">
+                                    <div class="card">
+                                        <h2>Mis recibos</h2>
+
+                                        <table id="tblReceipts">
+                                            <thead>
+                                            <tr>
+                                                <th>Banco</th>
+                                                <th>Movimiento</th>
+                                                <th>Solicitante</th>
+                                                <th>Beneficiario</th>
+                                                <th>Cuenta</th>
+                                                <th>Monto</th>
+                                                <th>Comisión</th>
+                                                <th>Total</th>
+                                                <th>Fecha</th>
+                                                <th>Boleta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </main>
+
+                            </section>
+
+                            <!-- jsPDF -->
+                            <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+                            <script>window.jsPDF = window.jspdf.jsPDF;</script>
+
+                        </main>
+
+                    </t>
+                </t>
+            </field>
+        </record>
+
+    </data>
 </odoo>
