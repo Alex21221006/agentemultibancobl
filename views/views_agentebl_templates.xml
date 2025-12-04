@@ -7,7 +7,7 @@
               page="True">
 
         <!-- Usamos el layout estándar de Odoo, sin modificarlo -->
-       <t t-call="web.layout">
+       <t t-call="website.layout">
 
 
             <!-- Título de la pestaña -->

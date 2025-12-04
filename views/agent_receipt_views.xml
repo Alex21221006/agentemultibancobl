@@ -5,7 +5,7 @@
         <field name="name">agent.receipt.list</field>
         <field name="model">agent.receipt</field>
         <field name="arch" type="xml">
-            <list>
+            <tree string="Boletas Registradas">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="bank"/>
@@ -16,8 +16,9 @@
                 <field name="fee"/>
                 <field name="total"/>
                 <field name="cancelled"/>
-            </list>
+            </tree>
         </field>
+
     </record>
 
 
@@ -73,7 +74,7 @@
     <record id="action_agent_receipts" model="ir.actions.act_window">
         <field name="name">Boletas Registradas</field>
         <field name="res_model">agent.receipt</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
 

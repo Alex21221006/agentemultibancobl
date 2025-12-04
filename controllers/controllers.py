@@ -37,11 +37,11 @@ def _get_json_body(kw):
 class AgenteMultibancoBL(http.Controller):
 
     # ===== PÁGINA PRINCIPAL =====
-    @http.route('/agente_multibanco', type='http', auth='user', website=True)
+    @http.route('/agente_multibanco', type='http', auth='public', website=True)
     def agente_multibanco_page(self, **kw):
-        # OJO: el nombre del módulo en el servidor es "agentemultibancobl"
+        # El nombre técnico del módulo es "moduloagentebl"
         # y el id del template es "agente_bl_page"
-        return request.render('agentemultibancobl.agente_bl_page', {})
+        return request.render('moduloagentebl.agente_bl_page', {})
 
     # ===== API: DNI =====
     @http.route(
