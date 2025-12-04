@@ -22,35 +22,52 @@ class AgentReceipt(models.Model):
     )
 
     # ---------------------------
-    # Banco / Red y Tipo de movimiento
-    # (Selection => lista desplegable)
+    # Banco / Red (Selection => lista desplegable)
     # ---------------------------
     bank = fields.Selection(
         [
             ("bcp", "BCP"),
-            ("interbank", "Interbank"),
+            ("interbank", "INTERBANK"),
             ("bbva", "BBVA"),
-            ("scotiabank", "Scotiabank"),
-            ("yape", "Yape"),
-            ("plin", "Plin"),
+            ("scotiabank", "SCOTIABANK"),
+            ("caja_arequipa", "CAJA AREQUIPA"),
+            ("caja_cusco", "CAJA CUSCO"),
+            ("banco_nacion", "BANCO DE LA NACION"),
+            ("yape", "YAPE"),
+            ("plin", "PLIN"),
+            ("bim", "BIM"),
+            ("kasnet", "KASNET"),
+            ("pagaya", "PAGAYA"),
+            ("bitel", "BITEL"),
+            ("entel", "ENTEL"),
+            ("movistar", "MOVISTAR"),
+            ("claro", "CLARO"),
+            ("azulito", "AZULITO"),
             ("otros", "Otros"),
         ],
         string="Banco / Red",
         required=True,
     )
 
+    # ---------------------------
+    # Tipo de movimiento (Selection => lista desplegable)
+    # ---------------------------
     movement = fields.Selection(
         [
-        ("deposit", "Depósito"),
-        ("withdrawal", "Retiro"),
-        ("payment", "Pago de servicio"),
-        ("transfer", "Transferencia"),
-        ("other", "Otros"),
+            ("deposit", "Depósito"),
+            ("withdrawal", "Retiro"),
+            ("giro", "Giro"),
+            ("payment", "Pago"),
+            ("recharge", "Recarga"),
+            ("other", "Otros"),
         ],
         string="Tipo de movimiento",
         required=True,
     )
 
+    # ---------------------------
+    # Operador
+    # ---------------------------
     operator_id = fields.Many2one(
         "res.users",
         string="Operador",
@@ -58,9 +75,12 @@ class AgentReceipt(models.Model):
         readonly=True,
     )
 
+    # ---------------------------
+    # Otros datos generales
+    # ---------------------------
     account = fields.Char(string="N° cuenta / N° celular")
     description = fields.Text(string="Descripción")
-    cancelled = fields.Boolean(string="Anulado", default=False)
+    cancelled = fields.Boolean(string="Anulado")
 
     # ---------------------------
     # Datos del solicitante
@@ -86,13 +106,11 @@ class AgentReceipt(models.Model):
     amount = fields.Monetary(
         string="Monto",
         currency_field="currency_id",
-        default=0.0,
     )
 
     fee = fields.Monetary(
         string="Comisión",
         currency_field="currency_id",
-        default=0.0,
     )
 
     total = fields.Monetary(
