@@ -5,10 +5,11 @@
     "data": [
         "security/ir.model.access.csv",
         "data/ir_sequence.xml",
+        "report/report_agent_receipt.xml",
         "views/views_agentebl_templates.xml",
         "views/agent_receipt_views.xml",
         "views/agent_menu.xml",
-        'report/report_agent_receipt.xml',
+        
     ],
     "assets": {
         "web.assets_frontend": [
