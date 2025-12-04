@@ -88,16 +88,20 @@
 
                     <p>
                         <strong>Monto:</strong>
-                        S/ <t t-esc="format_lang(o.amount, currency_obj=o.currency_id)"/>
+                        <span t-field="o.amount"
+                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                     </p>
                     <p>
                         <strong>Comisión:</strong>
-                        S/ <t t-esc="format_lang(o.fee, currency_obj=o.currency_id)"/>
+                        <span t-field="o.fee"
+                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                     </p>
                     <p>
                         <strong>Total:</strong>
-                        S/ <t t-esc="format_lang(o.total, currency_obj=o.currency_id)"/>
+                        <span t-field="o.total"
+                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                     </p>
+
 
                     <hr/>
 
