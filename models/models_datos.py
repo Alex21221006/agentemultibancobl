@@ -81,6 +81,14 @@ class AgentReceipt(models.Model):
         default=lambda self: self.env.user,
         readonly=True,
     )
+    
+    company_id = fields.Many2one(
+    'res.company',
+    string='Compañía',
+    default=lambda self: self.env.company,
+    readonly=True,
+    )
+
 
     account = fields.Char(string="N° cuenta / N° celular")
     description = fields.Text(string="Descripción")
