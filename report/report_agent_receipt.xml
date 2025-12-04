@@ -14,22 +14,13 @@
         <field name="print_report_name">
             (object.name or 'Boleta').replace('/', '_')
         </field>
-
-        <!-- Guarda el PDF en la bdd como adjunto la primera vez -->
-        <field name="attachment_use">True</field>
-        <field name="attachment">
-            (object.name or 'Boleta').replace('/', '_') + '.pdf'
-        </field>
     </record>
 
     <!-- Template QWeb del PDF -->
     <template id="report_agent_receipt">
         <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="o">
-                <!-- Contenedor principal con data-oe-model e id (requerido para adjuntos) -->
-                <div class="page"
-                     t-att-data-oe-model="o._name"
-                     t-att-data-oe-id="o.id">
+                <div class="page">
 
                     <h2 style="text-align:center;">
                         Agente Multibanco B&amp;L
