@@ -271,3 +271,15 @@ class AgentReceipt(models.Model):
             info = rec._fetch_dni_from_decolecta(dni)
             if info:
                 rec.beneficiario_nombre = info["nombreCompleto"]
+                
+    # ============================
+    #   Acción: Ver boleta en PDF
+    # ============================
+    def action_view_receipt_pdf(self):
+        """
+        Abre/imprime el PDF de la boleta actual.
+        """
+        self.ensure_one()
+        return self.env.ref(
+            'moduloagentebl.action_report_agent_receipt'
+        ).report_action(self)     

@@ -18,11 +18,12 @@
             <field name="cancelled"/>
 
             <!-- Columna para ver/descargar la boleta PDF -->
-            <button name="%(action_report_agent_receipt)d"
-                    type="action"
-                    string="Ver boleta"
-                    class="btn-secondary"
-                    icon="fa-print"/>
+            <button name="action_view_receipt_pdf"
+                type="object"
+                string="Ver boleta"
+                class="btn-link"
+                icon="fa-print"/>
+
         </list>
     </field>
 </record>
