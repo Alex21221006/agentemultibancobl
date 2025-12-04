@@ -2,6 +2,7 @@ from odoo import models, fields, api
 import os
 import requests
 import logging
+import math
 
 _logger = logging.getLogger(__name__)
 
@@ -111,9 +112,13 @@ class AgentReceipt(models.Model):
         currency_field="currency_id",
     )
 
+    # Comisión CALCULADA automáticamente según el monto
     fee = fields.Monetary(
         string="Comisión",
         currency_field="currency_id",
+        compute="_compute_fee",
+        store=True,
+        readonly=True,
     )
 
     total = fields.Monetary(
@@ -123,6 +128,27 @@ class AgentReceipt(models.Model):
         store=True,
         readonly=True,
     )
+
+    # ============================
+    #   Cálculo de montos
+    # ============================
+    @api.depends("amount")
+    def _compute_fee(self):
+        """
+        Regla:
+          - 0 o negativo -> comisión 0
+          - 0 < monto <= 100  -> 1
+          - 100 < monto <= 200 -> 2
+          - 200 < monto <= 300 -> 3
+          - ...
+          En general: ceil(monto / 100)
+        """
+        for rec in self:
+            amt = rec.amount or 0.0
+            if amt <= 0:
+                rec.fee = 0.0
+            else:
+                rec.fee = float(math.ceil(amt / 100.0))
 
     @api.depends("amount", "fee")
     def _compute_total(self):
